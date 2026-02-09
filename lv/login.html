@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <title>WiFi Hotspot - Pieslēgties</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #E53935 0%, #FB8C00 50%, #FBC02D 100%);
+            background-attachment: fixed;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .wifi-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #E53935 0%, #FB8C00 50%, #FBC02D 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(229, 57, 53, 0.4);
+        }
+
+        .wifi-icon i {
+            font-size: 36px;
+            color: white;
+        }
+
+        .logo-section h1 {
+            font-size: 26px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #E53935 0%, #FB8C00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .logo-section p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .lang-switch {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .lang-switch a {
+            color: #FB8C00;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 16px 16px 16px 50px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #FB8C00;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(251, 140, 0, 0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #E53935 0%, #FB8C00 50%, #FBC02D 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(229, 57, 53, 0.4);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(251, 140, 0, 0.5);
+        }
+
+        .trial-section {
+            background: linear-gradient(135deg, rgba(251, 192, 45, 0.2), rgba(251, 140, 0, 0.2));
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .trial-section a {
+            color: #E53935;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .error-message {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-top: 20px;
+            color: #991b1b;
+            font-size: 13px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .footer a {
+            color: #FB8C00;
+            text-decoration: none;
+        }
+
+        .bg-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) { width: 200px; height: 200px; top: 10%; left: 10%; }
+        .shape:nth-child(2) { width: 150px; height: 150px; top: 60%; right: 10%; animation-delay: -5s; }
+        .shape:nth-child(3) { width: 100px; height: 100px; bottom: 10%; left: 20%; animation-delay: -10s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    $(if chap-id)
+    <form name="sendin" action="$(link-login-only)" method="post" style="display: none;">
+        <input type="hidden" name="username" />
+        <input type="hidden" name="password" />
+        <input type="hidden" name="dst" value="$(link-orig)" />
+        <input type="hidden" name="popup" value="true" />
+    </form>
+    
+    <script type="text/javascript" src="/md5.js"></script>
+    <script type="text/javascript">
+        function doLogin() {
+            document.sendin.username.value = document.login.username.value;
+            document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+            document.sendin.submit();
+            return false;
+        }
+    </script>
+    $(endif)
+
+    <div class="login-container">
+        <div class="lang-switch">
+            <a href="$(link-login-only)?target=%2F&amp;dst=$(link-orig-esc)">English</a>
+        </div>
+
+        <div class="logo-section">
+            <div class="wifi-icon">
+                <i class="fas fa-wifi"></i>
+            </div>
+            <h1>WiFi Hotspot</h1>
+            <p>Lūdzu pieslēdzieties, lai piekļūtu internetam</p>
+        </div>
+
+        <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+            <input type="hidden" name="dst" value="$(link-orig)" />
+            <input type="hidden" name="popup" value="true" />
+
+            <div class="form-group">
+                <label for="username">Lietotājvārds</label>
+                <div class="input-wrapper">
+                    <input type="text" id="username" name="username" placeholder="Ievadiet lietotājvārdu" value="$(username)" />
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Parole</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" name="password" placeholder="Ievadiet paroli" />
+                    <i class="fas fa-lock"></i>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-login">
+                <i class="fas fa-sign-in-alt"></i>&nbsp; Pieslēgties
+            </button>
+        </form>
+
+        $(if trial == 'yes')
+        <div class="trial-section">
+            <p>Lai izmēģinātu bez maksas, <a href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">spiediet šeit</a></p>
+        </div>
+        $(endif)
+
+        $(if error)
+        <div class="error-message">
+            <i class="fas fa-exclamation-circle"></i> $(error)
+        </div>
+        $(endif)
+
+        <div class="footer">
+            <p>Powered by <a href="http://www.mikrotik.com" target="_blank">MikroTik RouterOS</a></p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById('username').focus();
+    </script>
+</body>
+</html>

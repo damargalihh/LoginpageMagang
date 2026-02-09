@@ -1,0 +1,50 @@
+/* ============================================
+   Local Icons - No External Dependencies
+   Simple CSS-based icons
+   ============================================ */
+
+/* Icon Base */
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 1em;
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* Text-based Icons */
+.icon-home::before { content: "⌂"; }
+.icon-mail::before { content: "✉"; }
+.icon-user::before { content: "👤"; }
+.icon-lock::before { content: "🔒"; }
+.icon-eye::before { content: "👁"; }
+.icon-eye-off::before { content: "🙈"; }
+.icon-check::before { content: "✓"; }
+.icon-error::before { content: "⚠"; }
+.icon-info::before { content: "ℹ"; }
+.icon-phone::before { content: "☎"; }
+.icon-location::before { content: "📍"; }
+.icon-clock::before { content: "⏱"; }
+.icon-wifi::before { content: "📶"; }
+.icon-logout::before { content: "↪"; }
+.icon-login::before { content: "↩"; }
+.icon-circle::before { content: "●"; }
+.icon-arrow::before { content: "→"; }
+.icon-facebook::before { content: "f"; font-weight: bold; }
+.icon-twitter::before { content: "𝕏"; }
+.icon-instagram::before { content: "📷"; }
+.icon-youtube::before { content: "▶"; }
+.icon-whatsapp::before { content: "💬"; }
+.icon-google::before { content: "G"; font-weight: bold; }
+.icon-network::before { content: "🌐"; }
+.icon-data::before { content: "↕"; }
+
+/* SVG Icon Container */
+.svg-icon {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    vertical-align: middle;
+}

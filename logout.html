@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>WiFi Hotspot - UMPKU Surakarta - Logout</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/logogram.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Page-specific overrides for root folder */
+        .wallpaper-bg .slide:nth-child(1) {
+            background-image: url('img/wp1.jpg');
+        }
+        .wallpaper-bg .slide:nth-child(2) {
+            background-image: url('img/wp2.jpg');
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Logout page - simple style */
+        .logout-container {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 380px;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .logout-header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+
+        .logout-header h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .logout-header p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .session-info {
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            margin-bottom: 20px;
+            border: none;
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            border: none;
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .btn-login:hover {
+            background: #c62828;
+        }
+
+        .footer {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Wallpaper Background -->
+    <div class="wallpaper-bg">
+        <div class="slide"></div>
+        <div class="slide"></div>
+    </div>
+    <div class="overlay-bg"></div>
+
+    <script language="JavaScript">
+        function openLogin() {
+            if (window.name != 'hotspot_logout') return true;
+            open('$(link-login)', '_blank', '');
+            window.close();
+            return false;
+        }
+    </script>
+
+    <!-- Main Content -->
+    <div class="logout-container">
+        <div class="logout-header">
+            <h1>Logout Berhasil</h1>
+            <p>Terima kasih telah menggunakan WiFi UMPKU</p>
+        </div>
+
+        <div class="session-info">
+            <div class="info-row">
+                <span class="info-label">Username</span>
+                <span class="info-value">$(username)</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">IP Address</span>
+                <span class="info-value">$(ip)</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Durasi Sesi</span>
+                <span class="info-value">$(uptime)</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Data Up/Down</span>
+                <span class="info-value">$(bytes-in-nice) / $(bytes-out-nice)</span>
+            </div>
+        </div>
+
+        <form action="$(link-login)" name="login" onSubmit="return openLogin()">
+            <button type="submit" class="btn-login">Login Kembali</button>
+        </form>
+
+        <div class="footer">
+            <p>&copy; 2026 UMPKU Surakarta</p>
+        </div>
+    </div>
+</body>
+</html>

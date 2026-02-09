@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>WiFi Hotspot - UMPKU Surakarta - Advertisement</title>
+    <meta http-equiv="refresh" content="2; url=$(link-orig)">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/logogram.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Page-specific overrides for root folder */
+        .wallpaper-bg .slide:nth-child(1) {
+            background-image: url('img/wp1.jpg');
+        }
+        .wallpaper-bg .slide:nth-child(2) {
+            background-image: url('img/wp2.jpg');
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .advert-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 50px 40px;
+            max-width: 420px;
+            width: 90%;
+        }
+
+        .advert-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .advert-icon i {
+            font-size: 36px;
+            color: var(--text-dark);
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 25px;
+        }
+
+        .subtitle a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .subtitle a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script language="JavaScript">
+        var popup = '';
+        function openOrig() {
+            if (window.focus) popup.focus();
+            location.href = '$(link-orig)';
+        }
+        function openAd() {
+            location.href = '$(link-redirect)';
+        }
+        function openAdvert() {
+            if (window.name != 'hotspot_advert') {
+                popup = open('$(link-redirect)', 'hotspot_advert', '');
+                setTimeout("openOrig()", 1000);
+                return;
+            }
+            setTimeout("openAd()", 1000);
+        }
+    </script>
+</head>
+<body onLoad="openAdvert()">
+    <!-- Wallpaper Background -->
+    <div class="wallpaper-bg">
+        <div class="slide"></div>
+        <div class="slide"></div>
+    </div>
+    <div class="overlay-bg"></div>
+
+    <!-- Main Content -->
+    <div class="advert-container">
+        <div class="advert-icon">
+            <i class="fas fa-bullhorn"></i>
+        </div>
+
+        <h1>Advertisement</h1>
+        <p class="subtitle">Jika tidak ada yang terjadi, buka <a href="$(link-redirect)" target="hotspot_advert">iklan</a> secara manual.</p>
+
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 UMPKU Surakarta. Powered by Tim IT</p>
+        </div>
+    </div>
+</body>
+</html>

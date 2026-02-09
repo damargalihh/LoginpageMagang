@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>WiFi Hotspot - UMPKU Surakarta - Status</title>
+    $(if refresh-timeout)
+    <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+    $(endif)
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/logogram.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Page-specific overrides for root folder */
+        .wallpaper-bg .slide:nth-child(1) {
+            background-image: url('img/wp1.jpg');
+        }
+        .wallpaper-bg .slide:nth-child(2) {
+            background-image: url('img/wp2.jpg');
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Status page - simple style */
+        .status-container {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 380px;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .status-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+
+        .status-header h1 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #2e7d32;
+            font-weight: 500;
+        }
+
+        .status-badge i {
+            font-size: 8px;
+        }
+
+        .session-info {
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            margin-bottom: 20px;
+            border: none;
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+
+        .btn-logout {
+            width: 100%;
+            padding: 12px;
+            background: var(--text-light);
+            border: none;
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .btn-logout:hover {
+            background: var(--text-dark);
+        }
+
+        .footer {
+            margin-top: 15px;
+        }
+    </style>
+    <script language="JavaScript">
+        $(if advert-pending == 'yes')
+        var popup = '';
+        function focusAdvert() {
+            if (window.focus) popup.focus();
+        }
+        function openAdvert() {
+            popup = open('$(link-advert)', 'hotspot_advert', '');
+            setTimeout("focusAdvert()", 1000);
+        }
+        $(endif)
+        function openLogout() {
+            if (window.name != 'hotspot_status') return true;
+            open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=320,height=400');
+            window.close();
+            return false;
+        }
+    </script>
+</head>
+<body $(if advert-pending == 'yes')onLoad="openAdvert()"$(endif)>
+    <!-- Wallpaper Background -->
+    <div class="wallpaper-bg">
+        <div class="slide"></div>
+        <div class="slide"></div>
+    </div>
+    <div class="overlay-bg"></div>
+
+    <!-- Main Content -->
+    <div class="status-container">
+        <div class="status-header">
+            <h1>Status Koneksi</h1>
+            <span class="status-badge"><i class="fas fa-circle"></i> Terhubung</span>
+        </div>
+
+        <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+            <div class="session-info">
+                $(if login-by == 'trial')
+                <div class="info-row">
+                    <span class="info-label">Mode</span>
+                    <span class="info-value">Trial</span>
+                </div>
+                $(elif login-by != 'mac')
+                <div class="info-row">
+                    <span class="info-label">Username</span>
+                    <span class="info-value">$(username)</span>
+                </div>
+                $(endif)
+                <div class="info-row">
+                    <span class="info-label">IP Address</span>
+                    <span class="info-value">$(ip)</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Data Up/Down</span>
+                    <span class="info-value">$(bytes-in-nice) / $(bytes-out-nice)</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Waktu Konek</span>
+                    <span class="info-value" id="realtime-clock">00:00:00</span>
+                </div>
+                $(if session-time-left)
+                <div class="info-row">
+                    <span class="info-label">Sisa Waktu</span>
+                    <span class="info-value">$(session-time-left)</span>
+                </div>
+                $(endif)
+                $(if blocked == 'yes')
+                <div class="info-row">
+                    <span class="info-label">Status</span>
+                    <span class="info-value"><a href="$(link-advert)" target="hotspot_advert">Lihat iklan</a></span>
+                </div>
+                $(endif)
+            </div>
+
+            $(if login-by-mac != 'yes')
+            <button type="submit" class="btn-logout">Logout</button>
+            $(endif)
+        </form>
+
+        <div class="footer">
+            <p>&copy; 2026 UMPKU Surakarta</p>
+        </div>
+    </div>
+
+    <script>
+        // Parse uptime dari MikroTik format (contoh: "1h30m15s" atau "30m15s" atau "15s")
+        function parseUptime(uptime) {
+            var totalSeconds = 0;
+            var days = uptime.match(/(\d+)d/);
+            var hours = uptime.match(/(\d+)h/);
+            var minutes = uptime.match(/(\d+)m/);
+            var seconds = uptime.match(/(\d+)s/);
+            
+            if (days) totalSeconds += parseInt(days[1]) * 86400;
+            if (hours) totalSeconds += parseInt(hours[1]) * 3600;
+            if (minutes) totalSeconds += parseInt(minutes[1]) * 60;
+            if (seconds) totalSeconds += parseInt(seconds[1]);
+            
+            return totalSeconds;
+        }
+
+        // Format seconds ke HH:MM:SS
+        function formatTime(totalSeconds) {
+            var hours = Math.floor(totalSeconds / 3600);
+            var minutes = Math.floor((totalSeconds % 3600) / 60);
+            var seconds = totalSeconds % 60;
+            
+            return String(hours).padStart(2, '0') + ':' + 
+                   String(minutes).padStart(2, '0') + ':' + 
+                   String(seconds).padStart(2, '0');
+        }
+
+        // Inisialisasi timer dari uptime MikroTik
+        var initialUptime = parseUptime('$(uptime)');
+        var clockElement = document.getElementById('realtime-clock');
+
+        function updateClock() {
+            clockElement.textContent = formatTime(initialUptime);
+            initialUptime++;
+        }
+
+        // Update setiap detik
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
