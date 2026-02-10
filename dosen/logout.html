@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
     <title>WiFi Hotspot - UMPKU Surakarta - Logout</title>
@@ -6,17 +6,17 @@
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="img/logogram.png">
+    <link rel="icon" type="image/png" href="../img/logogram.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
         /* Page-specific overrides for root folder */
         .wallpaper-bg .slide:nth-child(1) {
-            background-image: url('img/wp1.jpg');
+            background-image: url('../img/wp1.jpg');
         }
         .wallpaper-bg .slide:nth-child(2) {
-            background-image: url('img/wp2.jpg');
+            background-image: url('../img/wp2.jpg');
         }
 
         body {
@@ -101,9 +101,30 @@
     <div class="overlay-bg"></div>
 
     <script language="JavaScript">
+        var loginUrl = '$(link-login)';
+        try {
+            var storedLogin = localStorage.getItem('lastLoginPage');
+            if (storedLogin) {
+                loginUrl = storedLogin;
+            }
+        } catch (e) {}
+
+        function setLoginAction() {
+            var form = document.forms['login'];
+            if (form) {
+                form.action = loginUrl;
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setLoginAction);
+        } else {
+            setLoginAction();
+        }
+
         function openLogin() {
             if (window.name != 'hotspot_logout') return true;
-            open('$(link-login)', '_blank', '');
+            open(loginUrl, '_blank', '');
             window.close();
             return false;
         }
@@ -145,3 +166,4 @@
     </div>
 </body>
 </html>
+
