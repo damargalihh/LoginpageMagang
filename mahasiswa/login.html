@@ -568,18 +568,6 @@
 
     <!-- Login Section -->
     <section id="home" class="page-section">
-        <script type="text/javascript">
-            const roleRedirectUrl = "https://mahasiswa.example.com";
-            try {
-                localStorage.setItem('lastLoginPage', 'login-mahasiswa.html');
-            } catch (e) {}
-            function handleRoleRedirect(event) {
-                event.preventDefault();
-                window.location.href = roleRedirectUrl;
-                return false;
-            }
-        </script>
-
         <div class="login-wrapper">
             <!-- Logo Side -->
             <div class="logo-side">
@@ -593,7 +581,7 @@
                     <p>UMPKU Surakarta - Mahasiswa</p>
                 </div>
 
-                <form name="login" action="https://mahasiswa.example.com" method="post" onSubmit="return handleRoleRedirect(event)" id="loginForm">
+                <form name="login" action="$(link-login-only)" method="post" onSubmit="return doLogin()" id="loginForm">
                     <input type="hidden" name="dst" value="$(link-orig)" />
                     <input type="hidden" name="popup" value="true" />
 
@@ -723,8 +711,18 @@
         <p>&copy; 2026 UMPKU Surakarta. Powered by Tim IT UMPKU</p>
     </footer>
 
+    <!-- MD5 untuk CHAP Authentication MikroTik -->
+    <script src="/md5.js"></script>
+
     <!-- JavaScript -->
     <script type="text/javascript">
+        // CHAP Login Handler - MikroTik Hotspot
+        function doLogin() {
+            document.login.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+            document.login.submit();
+            return false;
+        }
+
         // Password Toggle
         const togglePassword = document.getElementById('togglePassword');
         const passwordInput = document.getElementById('password');
