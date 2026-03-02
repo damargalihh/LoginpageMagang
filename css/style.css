@@ -615,6 +615,51 @@ a {
 }
 
 /* ============================================
+   Google Auth Button
+   ============================================ */
+.google-auth-wrapper {
+    text-align: center;
+    margin-top: 12px;
+}
+
+.btn-google {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px 16px;
+    background: #ffffff;
+    color: #444444;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.btn-google img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 10px;
+    object-fit: contain;
+}
+
+.btn-google:hover {
+    background: #f7f8f8;
+    border-color: #c6c6c6;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-google:active {
+    background: #eeeeee;
+}
+
+/* ============================================
    Footer Link
    ============================================ */
 .footer-link {
