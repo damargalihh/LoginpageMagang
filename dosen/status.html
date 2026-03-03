@@ -9,18 +9,13 @@
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="img/logogram.png">
+    <link rel="icon" type="image/png" href="../img/logogram.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
-        /* Page-specific overrides */
-        .wallpaper-bg .slide:nth-child(1) {
-            background-image: url('img/wp1.jpg');
-        }
-        .wallpaper-bg .slide:nth-child(2) {
-            background-image: url('img/wp2.jpg');
-        }
+        .wallpaper-bg .slide:nth-child(1) { background-image: url('../img/wp1.jpg'); }
+        .wallpaper-bg .slide:nth-child(2) { background-image: url('../img/wp2.jpg'); }
 
         body {
             display: flex;
@@ -29,7 +24,6 @@
             padding: 20px;
         }
 
-        /* Status page - simple style */
         .status-container {
             position: relative;
             z-index: 10;
@@ -69,9 +63,7 @@
             font-weight: 500;
         }
 
-        .status-badge i {
-            font-size: 8px;
-        }
+        .status-badge i { font-size: 8px; }
 
         .session-info {
             background: transparent;
@@ -80,7 +72,6 @@
             margin-bottom: 20px;
             border: none;
             box-shadow: none;
-            backdrop-filter: none;
         }
 
         .btn-logout {
@@ -97,20 +88,13 @@
             transition: background 0.2s ease;
         }
 
-        .btn-logout:hover {
-            background: var(--text-dark);
-        }
-
-        .footer {
-            margin-top: 15px;
-        }
+        .btn-logout:hover { background: var(--text-dark); }
+        .footer { margin-top: 15px; }
     </style>
     <script language="JavaScript">
         $(if advert-pending == 'yes')
         var popup = '';
-        function focusAdvert() {
-            if (window.focus) popup.focus();
-        }
+        function focusAdvert() { if (window.focus) popup.focus(); }
         function openAdvert() {
             popup = open('$(link-advert)', 'hotspot_advert', '');
             setTimeout("focusAdvert()", 1000);
@@ -125,14 +109,12 @@
     </script>
 </head>
 <body $(if advert-pending == 'yes')onLoad="openAdvert()"$(endif)>
-    <!-- Wallpaper Background -->
     <div class="wallpaper-bg">
         <div class="slide"></div>
         <div class="slide"></div>
     </div>
     <div class="overlay-bg"></div>
 
-    <!-- Main Content -->
     <div class="status-container">
         <div class="status-header">
             <h1>Status Koneksi</h1>
@@ -189,34 +171,28 @@
     </div>
 
     <script>
-        // Parse uptime dari MikroTik format (contoh: "1h30m15s" atau "30m15s" atau "15s")
         function parseUptime(uptime) {
             var totalSeconds = 0;
             var days = uptime.match(/(\d+)d/);
             var hours = uptime.match(/(\d+)h/);
             var minutes = uptime.match(/(\d+)m/);
             var seconds = uptime.match(/(\d+)s/);
-            
             if (days) totalSeconds += parseInt(days[1]) * 86400;
             if (hours) totalSeconds += parseInt(hours[1]) * 3600;
             if (minutes) totalSeconds += parseInt(minutes[1]) * 60;
             if (seconds) totalSeconds += parseInt(seconds[1]);
-            
             return totalSeconds;
         }
 
-        // Format seconds ke HH:MM:SS
         function formatTime(totalSeconds) {
             var hours = Math.floor(totalSeconds / 3600);
             var minutes = Math.floor((totalSeconds % 3600) / 60);
             var seconds = totalSeconds % 60;
-            
-            return String(hours).padStart(2, '0') + ':' + 
-                   String(minutes).padStart(2, '0') + ':' + 
+            return String(hours).padStart(2, '0') + ':' +
+                   String(minutes).padStart(2, '0') + ':' +
                    String(seconds).padStart(2, '0');
         }
 
-        // Inisialisasi timer dari uptime MikroTik
         var initialUptime = parseUptime('$(uptime)');
         var clockElement = document.getElementById('realtime-clock');
 
@@ -225,7 +201,6 @@
             initialUptime++;
         }
 
-        // Update setiap detik
         updateClock();
         setInterval(updateClock, 1000);
     </script>

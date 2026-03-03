@@ -5,19 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="-1">
+    <meta http-equiv="refresh" content="3;url=$(link-login)">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="img/logogram.png">
+    <link rel="icon" type="image/png" href="../img/logogram.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
-        /* Page-specific overrides */
-        .wallpaper-bg .slide:nth-child(1) {
-            background-image: url('img/wp1.jpg');
-        }
-        .wallpaper-bg .slide:nth-child(2) {
-            background-image: url('img/wp2.jpg');
-        }
+        .wallpaper-bg .slide:nth-child(1) { background-image: url('../img/wp1.jpg'); }
+        .wallpaper-bg .slide:nth-child(2) { background-image: url('../img/wp2.jpg'); }
 
         body {
             display: flex;
@@ -26,7 +22,6 @@
             padding: 20px;
         }
 
-        /* Logout page - simple style */
         .logout-container {
             position: relative;
             z-index: 10;
@@ -65,7 +60,6 @@
             margin-bottom: 20px;
             border: none;
             box-shadow: none;
-            backdrop-filter: none;
         }
 
         .btn-login {
@@ -86,14 +80,23 @@
             background: #c62828;
         }
 
-        .footer {
+        .footer { margin-top: 15px; }
+
+        .redirect-info {
+            text-align: center;
             margin-top: 15px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .redirect-info .countdown {
+            font-weight: 600;
+            color: var(--primary);
         }
     </style>
 </head>
 
 <body>
-    <!-- Wallpaper Background -->
     <div class="wallpaper-bg">
         <div class="slide"></div>
         <div class="slide"></div>
@@ -102,26 +105,6 @@
 
     <script language="JavaScript">
         var loginUrl = '$(link-login)';
-        try {
-            var storedLogin = localStorage.getItem('lastLoginPage');
-            if (storedLogin) {
-                loginUrl = storedLogin;
-            }
-        } catch (e) {}
-
-        function setLoginAction() {
-            var form = document.forms['login'];
-            if (form) {
-                form.action = loginUrl;
-            }
-        }
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', setLoginAction);
-        } else {
-            setLoginAction();
-        }
-
         function openLogin() {
             if (window.name != 'hotspot_logout') return true;
             open(loginUrl, '_blank', '');
@@ -130,7 +113,6 @@
         }
     </script>
 
-    <!-- Main Content -->
     <div class="logout-container">
         <div class="logout-header">
             <h1>Logout Berhasil</h1>
@@ -160,9 +142,26 @@
             <button type="submit" class="btn-login">Login Kembali</button>
         </form>
 
+        <p class="redirect-info">
+            Redirect otomatis dalam <span class="countdown" id="countdown">3</span> detik...
+        </p>
+
         <div class="footer">
             <p>&copy; 2026 UMPKU Surakarta</p>
         </div>
     </div>
+
+    <script type="text/javascript">
+        var seconds = 3;
+        var countdownEl = document.getElementById('countdown');
+        var timer = setInterval(function() {
+            seconds--;
+            if (countdownEl) countdownEl.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(timer);
+                window.location.href = '$(link-login)';
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
