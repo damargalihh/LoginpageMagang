@@ -82,20 +82,20 @@
          * Kita gunakan window.location.replace agar tidak masuk history browser
          * (user tidak bisa "Back" ke halaman router ini).
          */
-        window.location.replace(role + '/login.html');
+        window.location.replace(role + '/page.html');
     </script>
 
     <!-- Fallback jika JavaScript disabled -->
     <noscript>
-        <meta http-equiv="refresh" content="0;url=tamu/login.html" />
+        <meta http-equiv="refresh" content="0;url=tamu/page.html" />
         <div style="text-align:center; padding:50px; font-family:sans-serif;">
             <h2>Pilih Login</h2>
             <p>JavaScript tidak aktif. Silakan pilih halaman login:</p>
             <ul style="list-style:none; padding:0;">
-                <li style="margin:10px;"><a href="dosen/login.html">Login Dosen</a></li>
-                <li style="margin:10px;"><a href="mahasiswa/login.html">Login Mahasiswa</a></li>
-                <li style="margin:10px;"><a href="staff/login.html">Login Staff</a></li>
-                <li style="margin:10px;"><a href="tamu/login.html">Login Tamu</a></li>
+                <li style="margin:10px;"><a href="dosen/page.html">Login Dosen</a></li>
+                <li style="margin:10px;"><a href="mahasiswa/page.html">Login Mahasiswa</a></li>
+                <li style="margin:10px;"><a href="staff/page.html">Login Staff</a></li>
+                <li style="margin:10px;"><a href="tamu/page.html">Login Tamu</a></li>
             </ul>
         </div>
     </noscript>
