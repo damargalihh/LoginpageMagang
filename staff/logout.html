@@ -5,15 +5,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="-1">
-    <meta http-equiv="refresh" content="3;url=$(link-login)">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../img/logogram.png">
+    <link rel="icon" type="image/png" href="img/logogram.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        .wallpaper-bg .slide:nth-child(1) { background-image: url('../img/wp1.jpg'); }
-        .wallpaper-bg .slide:nth-child(2) { background-image: url('../img/wp2.jpg'); }
+        .wallpaper-bg .slide:nth-child(1) { background-image: url('img/wp1.jpg'); }
+        .wallpaper-bg .slide:nth-child(2) { background-image: url('img/wp2.jpg'); }
 
         body {
             display: flex;
@@ -71,11 +70,15 @@
     <div class="overlay-bg"></div>
 
     <script language="JavaScript">
-        var loginUrl = '$(link-login)';
-        function openLogin() {
-            if (window.name != 'hotspot_logout') return true;
-            open(loginUrl, '_blank', '');
-            window.close();
+        var loginUrl = '$(link-login-only)';
+        function doLogin() {
+            if (window.name === 'hotspot_logout') {
+                try {
+                    var w = window.open(loginUrl, 'hotspot_login');
+                    if (w) { try { window.close(); } catch(e) {} return false; }
+                } catch(e) {}
+            }
+            window.location.href = loginUrl;
             return false;
         }
     </script>
@@ -91,21 +94,9 @@
             <div class="info-row"><span class="info-label">Durasi Sesi</span><span class="info-value">$(uptime)</span></div>
             <div class="info-row"><span class="info-label">Data Up/Down</span><span class="info-value">$(bytes-in-nice) / $(bytes-out-nice)</span></div>
         </div>
-        <form action="$(link-login)" name="login" onSubmit="return openLogin()">
-            <button type="submit" class="btn-login">Login Kembali</button>
-        </form>
-        <p class="redirect-info">Redirect otomatis dalam <span class="countdown" id="countdown">3</span> detik...</p>
+        <a href="$(link-login-only)" class="btn-login" onclick="return doLogin()" style="display:block;text-align:center;text-decoration:none;">Login Kembali</a>
         <div class="footer"><p>&copy; 2026 UMPKU Surakarta</p></div>
     </div>
 
-    <script type="text/javascript">
-        var seconds = 3;
-        var countdownEl = document.getElementById('countdown');
-        var timer = setInterval(function() {
-            seconds--;
-            if (countdownEl) countdownEl.textContent = seconds;
-            if (seconds <= 0) { clearInterval(timer); window.location.href = '$(link-login)'; }
-        }, 1000);
-    </script>
 </body>
 </html>

@@ -6,12 +6,11 @@
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="expires" content="-1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <link rel="icon" type="image/png" href="../img/logogram.png">
+    <link rel="icon" type="image/png" href="img/logogram.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/login.css">
-    <script src="../md5.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="md5.js" type="text/javascript"></script>
 </head>
 
 <body class="role-login">
@@ -25,7 +24,7 @@
     <section id="home" class="page-section">
         <div class="login-wrapper">
             <div class="login-container">
-                <img src="../img/logoutama.png" alt="Logo UMPKU" class="login-logo">
+                <img src="img/logoutama.png" alt="Logo UMPKU" class="login-logo">
                 <div class="login-header">
                     <h2>Login Dosen</h2>
                     <p>UMPKU Surakarta - Dosen</p>
@@ -33,7 +32,7 @@
 
                 <form name="sendin" action="$(link-login-only)" method="post" onSubmit="return doLogin(this)" id="loginForm">
                     <input type="hidden" name="dst" value="$(link-orig)" />
-                    <input type="hidden" name="popup" value="true" />
+                    <input type="hidden" name="popup" value="false" />
 
                     <div class="form-group">
                         <label for="username">Username</label>
@@ -62,7 +61,7 @@
 
                 <div class="google-auth-wrapper">
                     <a href="https://akses.umpku.ac.id/auth/google?role=dosen" class="btn-google">
-                        <img src="../img/google_logo.png" alt="Google"> Login dengan Google
+                        <img src="img/google_logo.png" alt="Google"> Login dengan Google
                     </a>
                 </div>
 
