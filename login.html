@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>WiFi Hotspot - UMPKU Surakarta</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background: #f0f0f0; }
+        .loading { display: flex; align-items: center; justify-content: center; min-height: 100vh; flex-direction: column; }
+        .loading p { color: #666; font-size: 14px; margin-top: 10px; }
+        .spinner { width: 40px; height: 40px; border: 4px solid #ddd; border-top: 4px solid #1a1a2e; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <div class="spinner"></div>
+        <p>Mengarahkan ke halaman login...</p>
+    </div>
+
+    <!--
+    =========================================================================
+    ROUTER LOGIN PAGE - MikroTik Hotspot (1 Server Profile, 4 Login Pages)
+    =========================================================================
+    File ini adalah login.html utama yang dipasang di html-directory MikroTik.
+    Ia mendeteksi IP user via $(ip) dan me-redirect ke halaman login sesuai VLAN/subnet.
+
+    KONFIGURASI SUBNET:
+    Sesuaikan subnet di bawah ini dengan konfigurasi jaringan Anda.
+
+    Contoh mapping:
+      192.168.10.x  → Dosen
+      192.168.20.x  → Mahasiswa
+      192.168.30.x  → Staff
+      192.168.40.x  → Tamu (default)
+    =========================================================================
+    -->
+
+    <script type="text/javascript">
+        /**
+         * IP user dari MikroTik template variable.
+         * $(ip) akan di-replace oleh MikroTik dengan IP address client.
+         */
+        var clientIp = '$(ip)';
+
+        /**
+         * KONFIGURASI SUBNET → ROLE
+         * ─────────────────────────────────────────────
+         * Ubah prefix subnet di bawah sesuai jaringan Anda.
+         * Format: { prefix: 'x.x.x', role: 'nama_folder' }
+         *
+         * Urutan penting — yang lebih spesifik taruh di atas.
+         * Jika tidak cocok satupun, default ke 'tamu'.
+         */
+        var subnetMap = [
+            { prefix: '192.168.10.', role: 'dosen' },
+            { prefix: '192.168.200.1', role: 'mahasiswa' },
+            { prefix: '192.168.30.', role: 'staff' },
+            { prefix: '192.168.40.', role: 'tamu' }
+        ];
+
+        /**
+         * Deteksi role berdasarkan IP prefix
+         */
+        function detectRole(ip) {
+            for (var i = 0; i < subnetMap.length; i++) {
+                if (ip.indexOf(subnetMap[i].prefix) === 0) {
+                    return subnetMap[i].role;
+                }
+            }
+            return 'tamu'; // default fallback
+        }
+
+        var role = detectRole(clientIp);
+
+        /**
+         * Redirect ke halaman login sesuai role.
+         * File login per-role ada di subfolder: dosen/login.html, mahasiswa/login.html, dll.
+         *
+         * Kita gunakan window.location.replace agar tidak masuk history browser
+         * (user tidak bisa "Back" ke halaman router ini).
+         */
+        window.location.replace(role + '/login.html');
+    </script>
+
+    <!-- Fallback jika JavaScript disabled -->
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=tamu/login.html" />
+        <div style="text-align:center; padding:50px; font-family:sans-serif;">
+            <h2>Pilih Login</h2>
+            <p>JavaScript tidak aktif. Silakan pilih halaman login:</p>
+            <ul style="list-style:none; padding:0;">
+                <li style="margin:10px;"><a href="dosen/login.html">Login Dosen</a></li>
+                <li style="margin:10px;"><a href="mahasiswa/login.html">Login Mahasiswa</a></li>
+                <li style="margin:10px;"><a href="staff/login.html">Login Staff</a></li>
+                <li style="margin:10px;"><a href="tamu/login.html">Login Tamu</a></li>
+            </ul>
+        </div>
+    </noscript>
+</body>
+</html>
